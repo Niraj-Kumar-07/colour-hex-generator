@@ -1,0 +1,115 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+	<meta charset="UTF-8"> 
+	<title>Top Colors Finder</title> 
+	<style> 
+		*{ 
+			box-sizing: border-box; 
+			margin: 0%; 
+			padding: 0%; 
+		} 
+
+		header, form, main{ 
+			margin: auto; 
+			width: 70%; 
+			font-family: Helvetica; 
+			padding: 1.1rem 1.2rem; 
+		} 
+
+		header > h1{ 
+			font-size: 2.5rem; 
+			margin-bottom: 20px; 
+		} 
+
+		header > p{ 
+			color: gray; 
+			font-size: 1.2rem; 
+		} 
+
+		form{ 
+			background-color: skyblue; 
+		} 
+
+		input{ 
+			margin: 10px 0; 
+		} 
+
+		input[type='submit'], input[type='file']{ 
+			font-size: 1.2rem; 
+		} 
+
+		input:hover{ 
+			cursor: pointer; 
+		} 
+
+		input[type='submit']{ 
+			padding: 0.5rem 0.8rem; 
+			border: 2px solid #003333; 
+			background-color: #003333; 
+			color: white; 
+			border-radius: 4px; 
+		} 
+
+		main{ 
+			padding: 0; 
+		} 
+
+		.pair{ 
+			width: 100%; 
+			display: flex; 
+			margin: auto; 
+			align-items: center; 
+		} 
+		.pair > .color-box{ 
+			width: 50%; 
+			height: 50px; 
+			border: 1px solid black; 
+			text-align: center; 
+			padding: 1.1%; 
+			margin: 0; 
+		} 
+		.pair > .color-box-value{ 
+			width: 50%; 
+			height: 50px; 
+			border: 1px solid black; 
+			text-align: center; 
+			padding: 1.1%; 
+			margin: 0; 
+		} 
+	</style> 
+</head> 
+<body> 
+	<header> 
+		<h1>Welcome to Image Colour Palette Generator</h1> 
+		<p> 
+			Upload an image and this site will tell you the top 10 most used colors along with their hex codes. 
+			If two colors appear same number of times, both will be shown here. 
+		</p> 
+	</header> 
+	<form action = "/" method = "POST" enctype = "multipart/form-data"> 
+		<input type = "file" name = "file" required /> 
+		<br> 
+		Select a Colour Code: 
+		<input type="radio" name="colour_code" value="rgb">RGB 
+		<input type="radio" name="colour_code" value="hex">Hex 
+		<br> 
+		<input type = "submit"/> 
+	</form> 
+	<main> 
+		{% for i in range(colors_list|length) %} 
+			<div class="pair"> 
+				{% if code != 'hex': %} 
+					<div class="color-box" style="background-color: rgb{{ colors_list[i] }};"></div> 
+					<div class="color-box-value"> {{i+1}}: rgb{{colors_list[i]}}</div> 
+				{% else: %} 
+					<div class="color-box" style="background-color: #{{ colors_list[i] }};"></div> 
+					<div class="color-box-value"> {{i+1}}: #{{colors_list[i]}}</div> 
+				{% endif %} 
+			</div> 
+		{% endfor %} 
+	</main> 
+
+</body> 
+</html>
+

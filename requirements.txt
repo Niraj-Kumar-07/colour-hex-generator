@@ -1,0 +1,3 @@
+Flask==3.0.3
+pillow
+numpy==1.26.4
